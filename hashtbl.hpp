@@ -2,10 +2,9 @@
 #pragma once
 
 #include <cstdlib>
-#include <vector>     // values
+#include <vector>
 #include <iostream>
 
-// alias for ease
 #define Hash Hashtbl<K, V>
 
 // key and value types
@@ -17,14 +16,13 @@ template <typename K, typename V> class Hashtbl {
   // data members
   private:
     const int len;
-    // does this initialise to the correct size?
-    // std::vector<K> keys;
+    // use vector or C-style array?
     std::vector<V> values;
     hash_function hash_f;
 
   public:
 
-    // TODO : is explicit required in constructor?
+    // is explicit required here?
     Hash (hash_function f, const int n) {
       len = n;
       &hash_f = f;
@@ -36,12 +34,10 @@ template <typename K, typename V> class Hashtbl {
       return hash_f(key);
     }
 
-    // getter with hash_fn
     V get(K key)  {
       return values.at(index(key));
     }
 
-    // setter for values
     void set(int i, V value) {
       values.at(i) = value;
     }
@@ -50,7 +46,7 @@ template <typename K, typename V> class Hashtbl {
       values.erase(values.begin()+index(key));
     }
 
-    // FIXME unsure what to do about K, V types
+    // no idea if this is the "right" way to deallocate stuff
     void del() {
       // deallocate pointers to value objects
       for (const V & i : values) {
