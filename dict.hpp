@@ -5,19 +5,21 @@
 
 template<typename K, typename V>
 class Dict  {
-  // identity to 0
+  // placeholder function: map all to 0
   int id(K key)  {
     return 0;
   }
 
   private:
-    static const int len;
+    const int len;
     Hash tbl;
 
   public:
+    // is this constructor necessary?
     Dict();
+
     Dict (const int n)  {
-      const int len = n;
+      len = n;
       // initialise underyling hashtbl
       Hash tbl = new Hash(id, len);
     }
